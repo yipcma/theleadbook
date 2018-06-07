@@ -30,13 +30,13 @@
         </div>
         <div> {{ lead.first_name }} {{ lead.last_name }} </div>
         <div> {{ lead.city }}, {{ lead.country }} <br> ({{ lead.members }} members)</div>
-                <div class="box-subtitle" v-if="lead.about_me"> About me <br> {{ lead.about_me }} </div>
-        <div class="box-subtitle">Skills <br> {{ [lead.skill_1, lead.skill_2, lead.skill_3].filter(skill => skill).join(', ') }}</div>
+                <div class="box__subtitle" v-if="lead.about_me"> About me <br> {{ lead.about_me }} </div>
+        <div class="box__subtitle">Skills <br> {{ [lead.skill_1, lead.skill_2, lead.skill_3].filter(skill => skill).join(', ') }}</div>
       </div>
     </el-col>
 
     <el-col v-if="getLeads.length === 0" :xs="24" :sm="24" :md="24">
-      <div class="box box-empty"> No Match Found</div>
+      <div class="box box__empty"> No Match Found</div>
     </el-col>
 
   </el-row> <!-- results -->
@@ -83,10 +83,14 @@ export default {
 }
 </script>
 
-<style>
+<style  lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-/* $material-shadow: 0 1px 3px 0 rgba(0,0,0,.15); */
+$material-shadow: 0 1px 3px 0 rgba(0,0,0,.15);
+
+[v-cloak] {
+  display: none;
+}
 
 body {
   margin: 0;
@@ -101,15 +105,15 @@ body {
 
 .col-space {
   content: '&nbsp;';
-  /* @media screen and (max-width: 767px) { display: none; } */
+  @media screen and (max-width: 767px) { display: none; }
 }
 
 .container {
   max-width: 980px;
   margin: 20px auto;
-  /* @media screen and (max-width: 1050px) { 
+  @media screen and (max-width: 1050px) { 
     width: 95%; 
-  } */
+  }
 }
 
 .box {
@@ -117,21 +121,19 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* box-shadow: $material-shadow; */
+  box-shadow: $material-shadow;
   min-height: 150px;
   border-radius: 5px;
   background-color: white;
   margin-bottom: 10px;
-}
-
-.box-subtitle { 
+  &__subtitle { 
     color: lighten(grey, 15%); 
   }
-  
-.box-empty {
+  &__empty {
     background-color: transparent; box-shadow: none 
   }
-  /* &:hover { cursor: pointer; } */
+  &:hover { cursor: pointer; }
+}
 
 .el-select {
   width: 100%;

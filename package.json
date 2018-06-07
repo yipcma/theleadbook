@@ -20,6 +20,8 @@
     "babel-preset-env": "^1.7.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-vue": "^4.5.0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.3",
     "standard": "^11.0.1",
     "vue-template-compiler": "^2.5.16"
   },
