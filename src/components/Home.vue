@@ -26,12 +26,12 @@
     <el-col v-for="(lead, ind) in getLeads" :key="'lead-'+ind" :xs="24" :sm="12" :md="8">
       <div class="box">
         <div>
-          <img :src="lead.profile_pic" :alt="lead.city">
+          <img :src="lead.image" :alt="lead.city">
         </div>
-        <div> {{ lead.first_name }} {{ lead.last_name }} </div>
-        <div> {{ lead.city }}, {{ lead.country }} <br> ({{ lead.members }} members)</div>
-                <div class="box__subtitle" v-if="lead.about_me"> About me <br> {{ lead.about_me }} </div>
-        <div class="box__subtitle">Skills <br> {{ [lead.skill_1, lead.skill_2, lead.skill_3].filter(skill => skill).join(', ') }}</div>
+        <div>{{ lead.name }}</div>
+        <div>{{ lead.city }}</div>
+        <!-- <div class="box__subtitle" v-if="lead.about_me"> About me <br> {{ lead.about_me }} </div> -->
+        <!-- <div class="box__subtitle">Skills <br> {{ [lead.skill_1, lead.skill_2, lead.skill_3].filter(skill => skill).join(', ') }}</div> -->
       </div>
     </el-col>
 
@@ -46,11 +46,12 @@
 
 <script>
 import axios from 'axios'
+import * as yaml from 'js-yaml' 
 
 export default {
   mounted() {
-    axios.get('https://my.api.mockaroo.com/devc.json?key=e1874cf0').then(res => {
-    this.leads = res.data
+    axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/src/assets/lead_profiles.yml').then(res => {
+      this.leads = yaml.load(res.data)
 })
     },
   data() {
@@ -66,7 +67,7 @@ export default {
   },
   computed: {
     getLeads() {
-      var leads = this.leads.filter((lead) => {
+      const leads = this.leads.filter((lead) => {
           return Object.values(lead).join(' ').toLowerCase().includes(this.filter.toLowerCase()) ;
         });
       
