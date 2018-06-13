@@ -17,3 +17,9 @@ about: Insert/update profile for non-technical lead
 
 
 **one line about you (this is to attract attention and make you memorable for other leads)**
+
+
+**public url to a profile picture of yours**
+
+
+**url to your facebook profile**
