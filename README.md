@@ -12,7 +12,7 @@ Create a PR on `assets/lead_profiles.yml` with your properly formatted entry
 
 ### for non-developers
 
-Create an issue following the template **Add my lead profile**
+Create an issue following the template [Add my lead profile](https://github.com/yipcma/theleadbook/issues/new?template=add-my-lead-profile.md)
 
 ## Install
 
