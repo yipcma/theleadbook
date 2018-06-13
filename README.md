@@ -22,7 +22,7 @@ Before committing please make sure you `yarn lint`, we follow standard style her
 
 ## Acknowledgments
 
-theleadbook was inspired by thefacebook
+theleadbook was inspired by thefacebook and the conversations happened at the Foo Bar, 1 Rathbone Square on the last day of the DevC Lead Summit 2018 London
 
 ## License
 
