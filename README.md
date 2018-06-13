@@ -1,4 +1,4 @@
-# theleadbook
+# theleadbook [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 
 > the one place for DevC leads to discover and connect
 
@@ -8,7 +8,7 @@ Not everyone takes notes, even fewer would share their interests and what they c
 
 ### for developers
 
-Create a PR on `assets/lead_profiles.yml` with your properly formatted entry
+Create a PR on `data/lead_profiles.yml` with your properly formatted entry
 
 ### for non-developers
 

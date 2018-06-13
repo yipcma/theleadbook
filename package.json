@@ -5,7 +5,7 @@
   "license": "GPL-3.0",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --dest docs",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -35,7 +35,8 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "standard"
     ],
     "rules": {},
     "parserOptions": {

@@ -1,14 +1,14 @@
 <template>
  <div class="container">
-  
+
   <el-row class="search-wrapper" :gutter="10">
-    
+
     <el-col :lg="12" :md="12" :sm="12" :xs="24">
-      <el-input placeholder="Filter by Name or interest" icon="search" v-model="filter" />
+      <el-input placeholder="Filter by name, city, any text" icon="search" v-model="filter" />
     </el-col>
-      
+
     <el-col class="col-space" :lg="6" :md="6" :sm="6" :xs="24"> &nbsp; </el-col>
-     
+
     <el-col :lg="6" :md="6" :sm="6" :xs="24">
       <el-select v-model="sort" placeholder="Sort by">
         <el-option
@@ -19,9 +19,9 @@
         </el-option>
       </el-select>
     </el-col>
-      
+
   </el-row> <!-- search wrapper -->
-    
+
   <el-row :gutter="10">
     <el-col v-for="(lead, ind) in getLeads" :key="'lead-'+ind" :xs="24" :sm="12" :md="8">
       <div class="box">
@@ -41,44 +41,50 @@
     </el-col>
 
   </el-row> <!-- results -->
-    
+
  </div> <!-- container -->
 </template>
 
 <script>
 import axios from 'axios'
-import * as yaml from 'js-yaml' 
+import * as yaml from 'js-yaml'
 
 export default {
-  mounted() {
-    axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/src/assets/lead_profiles.yml').then(res => {
+  mounted () {
+    axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/data/lead_profiles.yml').then(res => {
       this.leads = yaml.load(res.data)
     })
-    axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/src/assets/map_data.json').then(res => {
+    axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/data/map_data.json').then(res => {
       this.circles = res.data
     })
   },
-  data() {
-    return { 
+  data () {
+    return {
       filter: '',
       sort: '',
       options: [
-        { label: 'Default', value: 'none' },
-        { label: 'Member counts', value: 'members' },
+        { label: 'City alphabetical', value: 'city' },
+        { label: 'Member counts', value: 'members' }
       ],
       leads: [],
       circles: []
     }
   },
   computed: {
-    getLeads() {
+    getLeads () {
       let leads = this.leads.map(lead => ({...this.circles.find(circle => lead.city === circle.name), ...lead})).filter((lead) => {
-          return Object.values(lead).join(' ').toLowerCase().includes(this.filter.toLowerCase())
-        })
-      
-      if (this.sort == 'members') {
-        leads = leads.sort(function(a, b) {
+        return Object.values(lead).join(' ').toLowerCase().includes(this.filter.toLowerCase())
+      })
+
+      if (this.sort === 'members') {
+        leads = leads.sort(function (a, b) {
           return b.memberCount - a.memberCount
+        })
+      } else {
+        leads = leads.sort(function (a, b) {
+          if (a.city < b.city) return -1
+          if (a.city > b.city) return 1
+          return 0
         })
       }
 
@@ -116,8 +122,8 @@ body {
 .container {
   max-width: 980px;
   margin: 20px auto;
-  @media screen and (max-width: 1050px) { 
-    width: 95%; 
+  @media screen and (max-width: 1050px) {
+    width: 95%;
   }
 }
 
@@ -131,11 +137,11 @@ body {
   border-radius: 5px;
   background-color: white;
   margin-bottom: 10px;
-  &__subtitle { 
-    color: lighten(grey, 15%); 
+  &__subtitle {
+    color: lighten(grey, 15%);
   }
   &__empty {
-    background-color: transparent; box-shadow: none 
+    background-color: transparent; box-shadow: none
   }
   &:hover { cursor: pointer; }
 }
