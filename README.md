@@ -8,7 +8,16 @@ Not everyone takes notes, even fewer would share their interests and what they c
 
 ### for developers
 
-Create a PR on `data/lead_profiles.yml` with your properly formatted entry
+Create a PR on `data/lead_profiles.yml` with your properly formatted entry like the following:
+
+```yaml
+- city: Jeddah
+  image: https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-1/p200x200/29497101_10100123320476887_4194831559422902272_n.jpg?_nc_cat=0&oh=bfbb36254355b3dc78701de866e013d2&oe=5BAD0854
+  name: Andrew CM Yip
+  url: https://www.facebook.com/yipcma
+  about_me: I love making things and taking notes!
+  skills: data science, javascript, prototyping
+```
 
 ### for non-developers
 

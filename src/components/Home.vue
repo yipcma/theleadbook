@@ -4,7 +4,7 @@
   <el-row class="search-wrapper" :gutter="10">
 
     <el-col :lg="12" :md="12" :sm="12" :xs="24">
-      <el-input placeholder="Filter by name, city, any text" icon="search" v-model="filter" />
+      <el-input placeholder="Filter by name, city, skill, any text" icon="search" v-model="filter" />
     </el-col>
 
     <el-col class="col-space" :lg="6" :md="6" :sm="6" :xs="24"> &nbsp; </el-col>
@@ -30,9 +30,9 @@
         </div>
         <div>{{ lead.name }}</div>
         <div>{{ lead.city }}</div>
-        <div>{{ lead.memberCount }}</div>
-        <!-- <div class="box__subtitle" v-if="lead.about_me"> About me <br> {{ lead.about_me }} </div> -->
-        <!-- <div class="box__subtitle">Skills <br> {{ [lead.skill_1, lead.skill_2, lead.skill_3].filter(skill => skill).join(', ') }}</div> -->
+        <div>{{ lead.memberCount }} members</div>
+        <div class="box__subtitle" v-if="lead.about_me">{{ lead.about_me }} </div>
+        <div class="box__subtitle" v-if="lead.skills">Skills <br>{{ lead.skills }}</div>
       </div>
     </el-col>
 
