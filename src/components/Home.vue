@@ -1,5 +1,6 @@
 <template>
- <div class="container">
+<div class="container">
+<h1>theLeadBook</h1>
 
   <el-row class="search-wrapper" :gutter="10">
 
@@ -42,7 +43,7 @@
 
   </el-row> <!-- results -->
 
- </div> <!-- container -->
+</div> <!-- container -->
 </template>
 
 <script>
