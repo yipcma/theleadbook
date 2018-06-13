@@ -26,7 +26,7 @@
     <el-col v-for="(lead, ind) in getLeads" :key="'lead-'+ind" :xs="24" :sm="12" :md="8">
       <div class="box">
         <div>
-          <img :src="lead.image" :alt="lead.city">
+          <a :href="lead.url"><img :src="lead.image" :alt="lead.city"></a>
         </div>
         <div>{{ lead.name }}</div>
         <div>{{ lead.city }}</div>
@@ -143,7 +143,7 @@ body {
   &__empty {
     background-color: transparent; box-shadow: none
   }
-  &:hover { cursor: pointer; }
+  // &:hover { cursor: pointer; }
 }
 
 .el-select {
