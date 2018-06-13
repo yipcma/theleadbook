@@ -30,6 +30,7 @@
         </div>
         <div>{{ lead.name }}</div>
         <div>{{ lead.city }}</div>
+        <div>{{ lead.memberCount }}</div>
         <!-- <div class="box__subtitle" v-if="lead.about_me"> About me <br> {{ lead.about_me }} </div> -->
         <!-- <div class="box__subtitle">Skills <br> {{ [lead.skill_1, lead.skill_2, lead.skill_3].filter(skill => skill).join(', ') }}</div> -->
       </div>
@@ -52,8 +53,11 @@ export default {
   mounted() {
     axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/src/assets/lead_profiles.yml').then(res => {
       this.leads = yaml.load(res.data)
-})
-    },
+    })
+    axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/src/assets/map_data.json').then(res => {
+      this.circles = res.data
+    })
+  },
   data() {
     return { 
       filter: '',
@@ -62,23 +66,23 @@ export default {
         { label: 'Default', value: 'none' },
         { label: 'Member counts', value: 'members' },
       ],
-      leads: []
+      leads: [],
+      circles: []
     }
   },
   computed: {
     getLeads() {
-      const leads = this.leads.filter((lead) => {
-          return Object.values(lead).join(' ').toLowerCase().includes(this.filter.toLowerCase()) ;
-        });
+      let leads = this.leads.map(lead => ({...this.circles.find(circle => lead.city === circle.name), ...lead})).filter((lead) => {
+          return Object.values(lead).join(' ').toLowerCase().includes(this.filter.toLowerCase())
+        })
       
       if (this.sort == 'members') {
-        return leads.sort(function(a, b) {
-          return b.members - a.members
-        });
-      } else {
-        return leads;
+        leads = leads.sort(function(a, b) {
+          return b.memberCount - a.memberCount
+        })
       }
-      
+
+      return leads
     }
   }
 }

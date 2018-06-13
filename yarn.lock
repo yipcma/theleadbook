@@ -165,6 +165,10 @@
   version "7.0.0-beta.47"
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.47.tgz#4f564117ec39f96cf60fafcde35c9ddce0e008fd"
 
+"@babel/helper-plugin-utils@7.0.0-beta.51":
+  version "7.0.0-beta.51"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.51.tgz#0f6a5f2b6d1c6444413f8fab60940d79b63c2031"
+
 "@babel/helper-regex@7.0.0-beta.47":
   version "7.0.0-beta.47"
   resolved "https://registry.yarnpkg.com/@babel/helper-regex/-/helper-regex-7.0.0-beta.47.tgz#b8e3b53132c4edbb04804242c02ffe4d60316971"
@@ -296,6 +300,13 @@
     "@babel/helper-plugin-utils" "7.0.0-beta.47"
     "@babel/plugin-syntax-object-rest-spread" "7.0.0-beta.47"
 
+"@babel/plugin-proposal-object-rest-spread@^7.0.0-beta.51":
+  version "7.0.0-beta.51"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.0.0-beta.51.tgz#5bc469e5e6d1b84a5d6046b59e90ca016c2086d6"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.51"
+    "@babel/plugin-syntax-object-rest-spread" "7.0.0-beta.51"
+
 "@babel/plugin-proposal-optional-catch-binding@7.0.0-beta.47":
   version "7.0.0-beta.47"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-optional-catch-binding/-/plugin-proposal-optional-catch-binding-7.0.0-beta.47.tgz#8c6453919537517ea773bb8f3fceda4250795efa"
@@ -377,6 +388,12 @@
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-object-rest-spread/-/plugin-syntax-object-rest-spread-7.0.0-beta.47.tgz#21da514d94c138b2261ca09f0dec9abadce16185"
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.47"
+
+"@babel/plugin-syntax-object-rest-spread@7.0.0-beta.51":
+  version "7.0.0-beta.51"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-object-rest-spread/-/plugin-syntax-object-rest-spread-7.0.0-beta.51.tgz#6d57a119c1f064c458e45bad45bef0a83ed10c00"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.51"
 
 "@babel/plugin-syntax-optional-catch-binding@7.0.0-beta.47":
   version "7.0.0-beta.47"
