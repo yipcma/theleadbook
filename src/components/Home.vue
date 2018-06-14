@@ -33,7 +33,7 @@
         <a :href="lead.group_url"><div>{{ lead.city }}, {{ lead.country }}</div></a>
         <div>{{ lead.memberCount }} members</div>
         <div class="box__subtitle" v-if="lead.about_me">{{ lead.about_me }} </div>
-        <div class="box__subtitle" v-if="lead.skills">Skills <br>{{ lead.skills }}</div>
+        <div class="box__subtitle" v-if="lead.skills"><span>Skills</span> <br>{{ lead.skills }}</div>
       </div>
     </el-col>
 
