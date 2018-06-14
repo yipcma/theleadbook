@@ -27,7 +27,7 @@
     <el-col v-for="(lead, ind) in getLeads" :key="'lead-'+ind" :xs="24" :sm="12" :md="8">
       <div class="box">
         <div>
-          <a :href="lead.url"><img :src="lead.image" :alt="lead.city"></a>
+          <a :href="lead.url"><img :src="lead.image" :alt="lead.city" height=200px width=200px></a>
         </div>
         <div>{{ lead.name }}</div>
         <a :href="lead.group_url"><div>{{ lead.city }}, {{ lead.country }}</div></a>
@@ -74,8 +74,8 @@ export default {
   },
   computed: {
     getLeads () {
-      let leads = this.leads.map(lead => ({...this.circles.find(circle => lead.city === circle.name), ...lead})).filter((lead) => {
-        return Object.values(lead).join(' ').toLowerCase().includes(this.filter.toLowerCase())
+      let leads = this.leads.map(lead => ({...this.circles.find(circle => lead.city === circle.city), ...lead})).filter((lead) => {
+        return lead.country && Object.values(lead).join(' ').toLowerCase().includes(this.filter.toLowerCase())
       })
 
       switch (this.sort) {
