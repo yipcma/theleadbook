@@ -88,7 +88,7 @@ export default {
         case 'female':
           leads = leads.sort(function (a, b) {
             if (a.female) return -1
-            if (b.female) return -1
+            if (b.female) return 1
             return 0
           })
           break
