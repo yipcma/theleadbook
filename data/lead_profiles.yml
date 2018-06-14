@@ -110,6 +110,7 @@
   image: https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-1/p200x200/34393595_10104994621011251_3365700569745326080_n.jpg?_nc_cat=0&oh=ea97a6fb2d5417b07c326f0ce940f509&oe=5BBA7B0F
   name: Ilona Budapesti
   url: https://www.facebook.com/ilona.budapesti
+  female: true
 - city: Miami
   image: https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-1/c90.210.540.540/s200x200/20993075_10154939730121045_8446214105004930687_n.jpg?_nc_cat=0&oh=b28476549d1611245c7575060b46dbb6&oe=5BBD9A5E
   name: Auston Bunsen
@@ -334,6 +335,7 @@
   image: https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-1/p200x200/33532989_2231146160248671_1763403706474168320_n.jpg?_nc_cat=0&oh=feecbd3d96179bbe06a14d5e7bb90483&oe=5B7B0213
   name: Natalie Korotaeva
   url: https://www.facebook.com/korotaeva.natalie
+  female: true
 - city: Riga
   image: https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-1/c0.29.200.200/p200x200/31755205_1694808730595312_2223040781390708736_n.jpg?_nc_cat=0&oh=ff1eeb41ef7461f9708d9bb0df383adf&oe=5BBDD493
   name: "Krist\u012Bne Kor\u0146ilova"
@@ -760,7 +762,7 @@
   url: https://www.facebook.com/yipcma
   about_me: I love making things and taking notes!
   skills: data science, javascript, prototyping
-  female: False
+  female: false
 - city: Campinas
   image: https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-1/p200x200/16114208_1422619047757022_6633511979455299676_n.jpg?_nc_cat=0&oh=8e1c6b70179c808bdb08b098c6e7a3fb&oe=5BB0EECF
   name: Eduardo Yuji

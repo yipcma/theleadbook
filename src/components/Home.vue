@@ -65,7 +65,8 @@ export default {
       sort: '',
       options: [
         { label: 'City alphabetical', value: 'city' },
-        { label: 'Member counts', value: 'members' }
+        { label: 'Member counts', value: 'members' },
+        { label: 'Ladies first', value: 'female' }
       ],
       leads: [],
       circles: []
@@ -77,16 +78,27 @@ export default {
         return Object.values(lead).join(' ').toLowerCase().includes(this.filter.toLowerCase())
       })
 
-      if (this.sort === 'members') {
-        leads = leads.sort(function (a, b) {
-          return b.memberCount - a.memberCount
-        })
-      } else {
-        leads = leads.sort(function (a, b) {
-          if (a.city < b.city) return -1
-          if (a.city > b.city) return 1
-          return 0
-        })
+      switch (this.sort) {
+        case 'members':
+          leads = leads.sort(function (a, b) {
+            return b.memberCount - a.memberCount
+          })
+          break
+
+        case 'female':
+          leads = leads.sort(function (a, b) {
+            if (a.female) return -1
+            if (b.female) return -1
+            return 0
+          })
+          break
+
+        default:
+          leads = leads.sort(function (a, b) {
+            if (a.city < b.city) return -1
+            if (a.city > b.city) return 1
+            return 0
+          })
       }
 
       return leads
