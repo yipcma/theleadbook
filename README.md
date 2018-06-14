@@ -17,6 +17,7 @@ Create a PR on `data/lead_profiles.yml` with your properly formatted entry like 
   url: https://www.facebook.com/yipcma
   about_me: I love making things and taking notes!
   skills: data science, javascript, prototyping
+  female: False
 ```
 
 ### for non-developers
