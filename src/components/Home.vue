@@ -30,7 +30,7 @@
           <a :href="lead.url"><img :src="lead.image" :alt="lead.city"></a>
         </div>
         <div>{{ lead.name }}</div>
-        <div>{{ lead.city }}</div>
+        <div>{{ lead.city }}, {{ lead.country }}</div>
         <div>{{ lead.memberCount }} members</div>
         <div class="box__subtitle" v-if="lead.about_me">{{ lead.about_me }} </div>
         <div class="box__subtitle" v-if="lead.skills">Skills <br>{{ lead.skills }}</div>
