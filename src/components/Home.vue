@@ -55,8 +55,8 @@ export default {
     axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/data/lead_profiles.yml').then(res => {
       this.leads = yaml.load(res.data)
     })
-    axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/data/map_data.json').then(res => {
-      this.circles = res.data
+    axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/data/map_data.yml').then(res => {
+      this.circles = yaml.load(res.data)
     })
   },
   data () {
