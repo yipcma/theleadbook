@@ -1,49 +1,35 @@
 <template>
 <div class="container">
-<h1>theLeadBook</h1>
-
-  <el-row class="search-wrapper" :gutter="10">
-
-    <el-col :lg="12" :md="12" :sm="12" :xs="24">
-      <el-input placeholder="Filter by name, city, skill, any text" icon="search" v-model="filter" />
-    </el-col>
-
-    <el-col class="col-space" :lg="6" :md="6" :sm="6" :xs="24"> &nbsp; </el-col>
-
-    <el-col :lg="6" :md="6" :sm="6" :xs="24">
-      <el-select v-model="sort" placeholder="Sort by">
-        <el-option
-          v-for="(item, ind) in options"
-          :label="item.label"
-          :value="item.value"
-          :key="'option-'+ind">
-        </el-option>
-      </el-select>
-    </el-col>
-
-  </el-row> <!-- search wrapper -->
-
-  <el-row :gutter="10">
-    <el-col v-for="(lead, ind) in getLeads" :key="'lead-'+ind" :xs="24" :sm="12" :md="8">
-      <div class="box">
-        <div>
-          <a :href="lead.url"><img :src="lead.image" :alt="lead.city" height=200px width=200px></a>
-        </div>
-        <div>{{ lead.name }}</div>
-        <a :href="lead.group_url"><div>{{ lead.city }}, {{ lead.country }}</div></a>
-        <div>{{ lead.memberCount }} members</div>
-        <div class="box__subtitle" v-if="lead.about_me">{{ lead.about_me }} </div>
-        <div class="box__subtitle" v-if="lead.skills"><span>Skills</span> <br>{{ lead.skills }}</div>
-      </div>
-    </el-col>
-
-    <el-col v-if="getLeads.length === 0" :xs="24" :sm="24" :md="24">
-      <div class="box box__empty"> No Match Found</div>
-    </el-col>
-
-  </el-row> <!-- results -->
-
-</div> <!-- container -->
+  <h1>theLeadBook</h1>
+  <sui-grid :columns="2">
+    <sui-grid-row>
+      <sui-grid-column>
+        <sui-input placeholder="Search..." icon="search" v-model="filter" style="width:100%;"/>
+      </sui-grid-column>
+      <sui-grid-column>
+        <sui-dropdown
+              placeholder="Sort"
+              selection
+              :options="options"
+              v-model="sort"
+              style="width:100%;"
+            />
+      </sui-grid-column>
+    </sui-grid-row>
+  </sui-grid>
+  <sui-card-group :items-per-row="4" class="doubling">
+    <sui-card v-for="(lead, index) in getLeads" :key="'lead-' + index" :class="lead.regionColor" >
+      <sui-image :src="lead.image" size="medium"/>
+      <sui-card-content>
+        <sui-card-header>{{ lead.name }}</sui-card-header>
+        <sui-card-meta>{{ lead.city }}, {{ lead.country }}</sui-card-meta>
+        <sui-card-description v-if="lead.about_me">{{ lead.about_me }}</sui-card-description>
+      </sui-card-content>
+      <sui-card-content extra v-if="lead.skills">
+        <sui-icon name="code" />{{ lead.skills }}</sui-card-content>
+    </sui-card>
+  </sui-card-group>
+</div>
 </template>
 
 <script>
@@ -62,11 +48,11 @@ export default {
   data () {
     return {
       filter: '',
-      sort: '',
+      sort: null,
       options: [
-        { label: 'City alphabetical', value: 'city' },
-        { label: 'Member counts', value: 'members' },
-        { label: 'Ladies first', value: 'female' }
+        { text: 'City alphabetical', value: 'city' },
+        { text: 'Member counts', value: 'members' },
+        { text: 'Ladies first', value: 'female' }
       ],
       leads: [],
       circles: []
@@ -76,6 +62,19 @@ export default {
     getLeads () {
       let leads = this.leads.map(lead => ({...this.circles.find(circle => lead.city === circle.city), ...lead})).filter((lead) => {
         return lead.country && Object.values(lead).join(' ').toLowerCase().includes(this.filter.toLowerCase())
+      })
+
+      leads.forEach(lead => {
+        switch (lead.region) {
+          case 'Europe':
+            lead.regionColor = 'blue'
+            break
+          case 'SSA':
+            lead.regionColor = 'red'
+            break
+          case 'MENA':
+            lead.regionColor = 'green'
+        }
       })
 
       switch (this.sort) {
@@ -110,8 +109,6 @@ export default {
 <style  lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-$material-shadow: 0 1px 3px 0 rgba(0,0,0,.15);
-
 [v-cloak] {
   display: none;
 }
@@ -123,15 +120,6 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-.search-wrapper {
-  margin: 10px 0;
-}
-
-.col-space {
-  content: '&nbsp;';
-  @media screen and (max-width: 767px) { display: none; }
-}
-
 .container {
   max-width: 980px;
   margin: 20px auto;
@@ -140,26 +128,4 @@ body {
   }
 }
 
-.box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: $material-shadow;
-  min-height: 150px;
-  border-radius: 5px;
-  background-color: white;
-  margin-bottom: 10px;
-  &__subtitle {
-    color: lighten(grey, 15%);
-  }
-  &__empty {
-    background-color: transparent; box-shadow: none
-  }
-  // &:hover { cursor: pointer; }
-}
-
-.el-select {
-  width: 100%;
-}
 </style>
