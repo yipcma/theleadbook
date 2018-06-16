@@ -1,6 +1,20 @@
 <template>
 <div class="container">
-  <h1>theLeadBook</h1>
+  <h1>theLeadBook (EMEA)</h1>
+  <sui-statistics-group :columns="3">
+    <sui-statistic in-group>
+      <sui-statistic-value>{{ leads.length }}</sui-statistic-value>
+      <sui-statistic-label>Leads</sui-statistic-label>
+    </sui-statistic>
+    <sui-statistic in-group>
+      <sui-statistic-value>{{ nCircles }}</sui-statistic-value>
+      <sui-statistic-label>Circles</sui-statistic-label>
+    </sui-statistic>
+    <sui-statistic in-group>
+      <sui-statistic-value>{{ nMembers }}</sui-statistic-value>
+      <sui-statistic-label>Members</sui-statistic-label>
+    </sui-statistic>
+  </sui-statistics-group>
   <sui-grid :columns="2">
     <sui-grid-row>
       <sui-grid-column>
@@ -50,7 +64,11 @@ export default {
         return yaml.load(res.data)
       }),
       axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/data/map_data.yml').then(res => {
-        return yaml.load(res.data)
+        const dat = yaml.load(res.data)
+        this.nCircles = dat.length
+        const reducer = (accumulator, currentValue) => accumulator + currentValue
+        this.nMembers = dat.map(circle => circle.memberCount).reduce(reducer)
+        return dat
       })
     ]).then((res) => {
       const leads = res[0].map(lead => ({...res[1].find(circle => lead.city === circle.city), ...lead}))
@@ -78,7 +96,9 @@ export default {
         { text: 'Ladies first', value: 'female' }
       ],
       leads: [],
-      cardActive: null
+      cardActive: null,
+      nCircles: null,
+      nMembers: null
     }
   },
   computed: {
