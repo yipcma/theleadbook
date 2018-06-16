@@ -21,10 +21,10 @@
         <sui-input placeholder="Search..." icon="search" v-model="filter" style="width:100%;"/>
       </sui-grid-column>
       <sui-grid-column>
-        <sui-button-group style="width:100%;">
-          <sui-button color="blue" inverted @click="region='Europe'">Europe</sui-button>
-          <sui-button color="green" inverted @click="region='MENA'">MENA</sui-button>
-          <sui-button color="red" inverted @click="region='SSA'">SSA</sui-button>
+        <sui-button-group :widths="4" style="width:100%;">
+          <sui-button color="blue" basic @click="region='Europe'">EU</sui-button>
+          <sui-button color="green" basic @click="region='MENA'">MENA</sui-button>
+          <sui-button color="red" basic @click="region='SSA'">SSA</sui-button>
           <sui-button color="black" basic @click="region=null">All</sui-button>
         </sui-button-group>
       </sui-grid-column>
