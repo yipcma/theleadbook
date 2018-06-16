@@ -58,16 +58,17 @@ import { rows } from 'google-spreadsheets'
 import { promisify } from 'bluebird'
 
 const getRows = promisify(rows)
+const sheetId = '1NLf9uHCoVjVITKtmWzrwkXpgXSJ2b3NvhYl7P21l13I'
 
 export default {
   mounted () {
     Promise.all([
       getRows({
-        key: '1NLf9uHCoVjVITKtmWzrwkXpgXSJ2b3NvhYl7P21l13I',
+        key: sheetId,
         worksheet: 1
       }),
       getRows({
-        key: '1NLf9uHCoVjVITKtmWzrwkXpgXSJ2b3NvhYl7P21l13I',
+        key: sheetId,
         worksheet: 2
       }).then(res => {
         this.nCircles = res.length
