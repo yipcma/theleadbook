@@ -45,32 +45,15 @@ import * as yaml from 'js-yaml'
 
 export default {
   mounted () {
-    axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/data/lead_profiles.yml').then(res => {
-      this.leads = yaml.load(res.data)
-    })
-    axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/data/map_data.yml').then(res => {
-      this.circles = yaml.load(res.data)
-    })
-  },
-  data () {
-    return {
-      filter: '',
-      sort: null,
-      options: [
-        { text: 'City alphabetical', value: 'city' },
-        { text: 'Ladies first', value: 'female' }
-      ],
-      leads: [],
-      circles: [],
-      cardActive: null
-    }
-  },
-  computed: {
-    getLeads () {
-      let leads = this.leads.map(lead => ({...this.circles.find(circle => lead.city === circle.city), ...lead})).filter((lead) => {
-        return lead.country && Object.values(lead).join(' ').toLowerCase().includes(this.filter.toLowerCase())
+    Promise.all([
+      axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/data/lead_profiles.yml').then(res => {
+        return yaml.load(res.data)
+      }),
+      axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/data/map_data.yml').then(res => {
+        return yaml.load(res.data)
       })
-
+    ]).then((res) => {
+      const leads = res[0].map(lead => ({...res[1].find(circle => lead.city === circle.city), ...lead}))
       leads.forEach(lead => {
         switch (lead.region) {
           case 'Europe':
@@ -83,14 +66,28 @@ export default {
             lead.regionColor = 'green'
         }
       })
+      this.leads = leads.filter(lead => lead.country)
+    })
+  },
+  data () {
+    return {
+      filter: '',
+      sort: null,
+      options: [
+        { text: 'City alphabetical', value: 'city' },
+        { text: 'Ladies first', value: 'female' }
+      ],
+      leads: [],
+      cardActive: null
+    }
+  },
+  computed: {
+    getLeads () {
+      let leads = this.leads.filter((lead) => {
+        return Object.values(lead).join(' ').toLowerCase().includes(this.filter.toLowerCase())
+      })
 
       switch (this.sort) {
-        case 'members':
-          leads = leads.sort(function (a, b) {
-            return b.memberCount - a.memberCount
-          })
-          break
-
         case 'female':
           leads = leads.sort(function (a, b) {
             if (a.female) return -1
@@ -113,7 +110,7 @@ export default {
 }
 </script>
 
-<style  lang="scss">
+<style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 [v-cloak] {
