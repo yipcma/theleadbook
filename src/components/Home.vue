@@ -73,7 +73,7 @@ export default {
       }).then(res => {
         this.nCircles = res.length
         const reducer = (accumulator, currentValue) => accumulator + currentValue
-        this.nMembers = res.map(circle => Number(circle.membercount)).reduce(reducer)
+        this.nMembers = res.map(circle => Number(circle.membercount) || 0).reduce(reducer)
         return res
       })
     ]).then((res) => {
@@ -90,7 +90,7 @@ export default {
             lead.regionColor = 'green'
         }
         lead.female = lead.female === 'TRUE'
-        Object.keys(lead).forEach((key) => (lead[key] === Object(lead[key])) && delete lead[key])
+        Object.keys(lead).forEach(key => (lead[key] === Object(lead[key])) && delete lead[key])
       })
       this.leads = leads.filter(lead => lead.country)
     })
