@@ -1,5 +1,6 @@
 <template>
 <div class="container">
+  <img src="../assets/devc-logo.png" alt="Developer Circles from Facebook">
   <h1>theLeadBook (EMEA)</h1>
   <sui-statistics-group :columns="3">
     <sui-statistic in-group>
@@ -15,7 +16,7 @@
       <sui-statistic-label>Members</sui-statistic-label>
     </sui-statistic>
   </sui-statistics-group>
-  <sui-grid :columns="3">
+  <sui-grid :columns="3" stackable>
     <sui-grid-row>
       <sui-grid-column>
         <sui-input placeholder="Search..." icon="search" v-model="filter" style="width:100%;"/>
