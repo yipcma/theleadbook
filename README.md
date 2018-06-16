@@ -1,34 +1,22 @@
-# theleadbook [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+# theleadbook [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://standardjs.com) [![vue-3.0](https://img.shields.io/badge/vue-3.0-brightgreen.svg)](https://vuejs.org/)
 
 > the one place for DevC leads to discover and connect
 
-Not everyone takes notes, even fewer would share their interests and what they can offer on their social media profiles. Why not have a place just for that?
+Not everyone takes notes, even fewer would share their interests and what they can offer on their social media profiles. Why not have a place for just that?
 
 ## Usage
 
-### for developers
+Update your profile on the leads sheet of [this Google Sheet](https://docs.google.com/spreadsheets/d/1NLf9uHCoVjVITKtmWzrwkXpgXSJ2b3NvhYl7P21l13I/edit?usp=sharing)
 
-Create a PR on `data/lead_profiles.yml` with your properly formatted entry like the following:
-
-```yaml
-- city: Jeddah
-  image: https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-1/p200x200/29497101_10100123320476887_4194831559422902272_n.jpg?_nc_cat=0&oh=bfbb36254355b3dc78701de866e013d2&oe=5BAD0854
-  name: Andrew CM Yip
-  url: https://www.facebook.com/yipcma
-  about_me: I love making things and taking notes!
-  skills: data science, javascript, prototyping
-  female: false
-```
-
-### for non-developers
-
-Create an issue following the template [Add my lead profile](https://github.com/yipcma/theleadbook/issues/new?template=add-my-lead-profile.md)
+### Please make sure your city matches the city in the cities sheet and follow formatting conventions
 
 ## Install
 
 To run a dev-server as you develop, clone this repo, `yarn`, and `yarn serve`
 
 Before committing please make sure you `yarn lint`, we follow standard style here
+
+We welcome PRs here
 
 ## Acknowledgments
 
