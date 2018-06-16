@@ -19,9 +19,16 @@
   </sui-grid>
   <sui-card-group :items-per-row="4" class="doubling">
     <sui-card v-for="(lead, index) in getLeads" :key="'lead-' + index" :class="lead.regionColor" >
-      <sui-image :src="lead.image" size="medium"/>
+      <sui-dimmer-dimmable
+        @mouseenter.native="cardActive = index"
+        @mouseleave.native="cardActive = null">
+        <sui-image :src="lead.image" size="medium"/>
+        <sui-dimmer blurring :active="cardActive === index">
+          <sui-button><a :href="lead.group_url" target="_blank">View Group</a></sui-button>
+        </sui-dimmer>
+      </sui-dimmer-dimmable>
       <sui-card-content>
-        <sui-card-header>{{ lead.name }}</sui-card-header>
+        <sui-card-header><a :href="lead.url" target="_blank">{{ lead.name }}</a></sui-card-header>
         <sui-card-meta>{{ lead.city }}, {{ lead.country }}</sui-card-meta>
         <sui-card-description v-if="lead.about_me">{{ lead.about_me }}</sui-card-description>
       </sui-card-content>
@@ -51,11 +58,11 @@ export default {
       sort: null,
       options: [
         { text: 'City alphabetical', value: 'city' },
-        { text: 'Member counts', value: 'members' },
         { text: 'Ladies first', value: 'female' }
       ],
       leads: [],
-      circles: []
+      circles: [],
+      cardActive: null
     }
   },
   computed: {
