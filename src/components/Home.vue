@@ -15,10 +15,18 @@
       <sui-statistic-label>Members</sui-statistic-label>
     </sui-statistic>
   </sui-statistics-group>
-  <sui-grid :columns="2">
+  <sui-grid :columns="3">
     <sui-grid-row>
       <sui-grid-column>
         <sui-input placeholder="Search..." icon="search" v-model="filter" style="width:100%;"/>
+      </sui-grid-column>
+      <sui-grid-column>
+        <sui-button-group style="width:100%;">
+          <sui-button color="blue" inverted @click="region='Europe'">Europe</sui-button>
+          <sui-button color="green" inverted @click="region='MENA'">MENA</sui-button>
+          <sui-button color="red" inverted @click="region='SSA'">SSA</sui-button>
+          <sui-button color="black" basic @click="region=null">All</sui-button>
+        </sui-button-group>
       </sui-grid-column>
       <sui-grid-column>
         <sui-dropdown
@@ -106,7 +114,8 @@ export default {
       leads: [],
       cardActive: null,
       nCircles: null,
-      nMembers: null
+      nMembers: null,
+      region: null
     }
   },
   computed: {
@@ -132,7 +141,10 @@ export default {
           })
       }
 
-      return leads
+      return leads.filter(lead => {
+        if (this.region === null) return true
+        return lead.region === this.region
+      })
     }
   }
 }
