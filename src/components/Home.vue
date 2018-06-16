@@ -38,15 +38,15 @@
         @mouseleave.native="cardActive = null">
         <sui-image :src="lead.image" size="medium"/>
         <sui-dimmer blurring :active="cardActive === index">
-          <sui-button><a :href="lead.group_url" target="_blank">View Group</a></sui-button>
+          <sui-button><a :href="lead.groupurl" target="_blank">View Group</a></sui-button>
         </sui-dimmer>
       </sui-dimmer-dimmable>
       <sui-card-content>
         <sui-card-header><a :href="lead.url" target="_blank">{{ lead.name }}</a></sui-card-header>
         <sui-card-meta>{{ lead.city }}, {{ lead.country }}</sui-card-meta>
-        <sui-card-description v-if="lead.about_me">{{ lead.about_me }}</sui-card-description>
+        <sui-card-description v-if="!isObject(lead.aboutme)">{{ lead.aboutme }}</sui-card-description>
       </sui-card-content>
-      <sui-card-content extra v-if="lead.skills">
+      <sui-card-content extra v-if="!isObject(lead.skills)">
         <sui-icon name="code" />{{ lead.skills }}</sui-card-content>
     </sui-card>
   </sui-card-group>
@@ -54,21 +54,26 @@
 </template>
 
 <script>
-import axios from 'axios'
-import * as yaml from 'js-yaml'
+import { rows } from 'google-spreadsheets'
+import { promisify } from 'bluebird'
+
+const getRows = promisify(rows)
 
 export default {
   mounted () {
     Promise.all([
-      axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/data/lead_profiles.yml').then(res => {
-        return yaml.load(res.data)
+      getRows({
+        key: '1NLf9uHCoVjVITKtmWzrwkXpgXSJ2b3NvhYl7P21l13I',
+        worksheet: 1
       }),
-      axios.get('https://raw.githubusercontent.com/yipcma/theleadbook/master/data/map_data.yml').then(res => {
-        const dat = yaml.load(res.data)
-        this.nCircles = dat.length
+      getRows({
+        key: '1NLf9uHCoVjVITKtmWzrwkXpgXSJ2b3NvhYl7P21l13I',
+        worksheet: 2
+      }).then(res => {
+        this.nCircles = res.length
         const reducer = (accumulator, currentValue) => accumulator + currentValue
-        this.nMembers = dat.map(circle => circle.memberCount).reduce(reducer)
-        return dat
+        this.nMembers = res.map(circle => Number(circle.membercount)).reduce(reducer)
+        return res
       })
     ]).then((res) => {
       const leads = res[0].map(lead => ({...res[1].find(circle => lead.city === circle.city), ...lead}))
@@ -83,6 +88,7 @@ export default {
           case 'MENA':
             lead.regionColor = 'green'
         }
+        lead.female = lead.female === 'TRUE'
       })
       this.leads = leads.filter(lead => lead.country)
     })
@@ -125,6 +131,11 @@ export default {
       }
 
       return leads
+    }
+  },
+  methods: {
+    isObject: obj => {
+      return obj === Object(obj)
     }
   }
 }
