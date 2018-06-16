@@ -36,7 +36,7 @@
       <sui-dimmer-dimmable
         @mouseenter.native="cardActive = index"
         @mouseleave.native="cardActive = null">
-        <sui-image :src="lead.image" size="medium"/>
+        <sui-image v-if="lead.image" :src="lead.image" size="medium"/>
         <sui-dimmer blurring :active="cardActive === index">
           <sui-button><a :href="lead.groupurl" target="_blank">View Group</a></sui-button>
         </sui-dimmer>
@@ -44,9 +44,9 @@
       <sui-card-content>
         <sui-card-header><a :href="lead.url" target="_blank">{{ lead.name }}</a></sui-card-header>
         <sui-card-meta>{{ lead.city }}, {{ lead.country }}</sui-card-meta>
-        <sui-card-description v-if="!isObject(lead.aboutme)">{{ lead.aboutme }}</sui-card-description>
+        <sui-card-description v-if="lead.aboutme">{{ lead.aboutme }}</sui-card-description>
       </sui-card-content>
-      <sui-card-content extra v-if="!isObject(lead.skills)">
+      <sui-card-content extra v-if="lead.skills">
         <sui-icon name="code" />{{ lead.skills }}</sui-card-content>
     </sui-card>
   </sui-card-group>
@@ -90,6 +90,7 @@ export default {
             lead.regionColor = 'green'
         }
         lead.female = lead.female === 'TRUE'
+        Object.keys(lead).forEach((key) => (lead[key] === Object(lead[key])) && delete lead[key])
       })
       this.leads = leads.filter(lead => lead.country)
     })
@@ -132,11 +133,6 @@ export default {
       }
 
       return leads
-    }
-  },
-  methods: {
-    isObject: obj => {
-      return obj === Object(obj)
     }
   }
 }
