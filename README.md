@@ -8,7 +8,7 @@ Not everyone takes notes, even fewer would share their interests and what they c
 
 Update your profile on the leads sheet of [this Google Sheet](https://docs.google.com/spreadsheets/d/1NLf9uHCoVjVITKtmWzrwkXpgXSJ2b3NvhYl7P21l13I/edit?usp=sharing)
 
-### Please make sure your city matches the city in the cities sheet and follow formatting conventions
+### Please make sure your city matches the city in the circles sheet and follow formatting conventions
 
 ## Install
 
