@@ -40,7 +40,7 @@
       </sui-grid-column>
     </sui-grid-row>
   </sui-grid>
-  <sui-card-group :items-per-row="4" class="doubling">
+  <sui-card-group :items-per-row="4" class="doubling" v-if="getLeads">
     <sui-card v-for="(lead, index) in getLeads" :key="'lead-' + index" :class="lead.regionColor" >
       <sui-dimmer-dimmable
         @mouseenter.native="cardActive = index"
@@ -59,6 +59,7 @@
         <sui-icon name="code" />{{ lead.skills }}</sui-card-content>
     </sui-card>
   </sui-card-group>
+  <sui-segment v-if="getLeads.length === 0">No match found</sui-segment>
 </div>
 </template>
 
