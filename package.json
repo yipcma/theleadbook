@@ -5,8 +5,9 @@
   "license": "GPL-3.0",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --dest ../theleadbook-app/docs",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "deploy": "push-dir --dir=dist --branch=gh-pages"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
@@ -25,6 +26,7 @@
     "eslint-loader": "^2.0.0",
     "eslint-plugin-vue": "^4.5.0",
     "node-sass": "^4.9.0",
+    "push-dir": "^0.4.1",
     "sass-loader": "^7.0.3",
     "standard": "^11.0.1",
     "vue-template-compiler": "^2.5.16"
