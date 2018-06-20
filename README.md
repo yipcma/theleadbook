@@ -1,4 +1,4 @@
-# theleadbook [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://standardjs.com) [![vue-3.0](https://img.shields.io/badge/vue-3.0-brightgreen.svg)](https://vuejs.org/)
+# theleadbook [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://standardjs.com) [![vue-3.0](https://img.shields.io/badge/vue-3.0-brightgreen.svg)](https://vuejs.org/) [![Build Status](https://travis-ci.org/yipcma/theleadbook.svg?branch=master)](https://travis-ci.org/yipcma/theleadbook)
 
 > the one place for DevC leads to discover and connect
 
