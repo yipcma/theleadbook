@@ -8,6 +8,14 @@ Not everyone takes notes, even fewer would share their interests and what they c
 
 Create your profile [here](https://goo.gl/forms/ulfzzJoea9uEaUAs1)
 
+### How to set your photo url
+To use your fb profile pic for leadbook feel free to use this formula:
+https://graph.facebook.com/YOUR_FB_ID/picture?type=large
+
+Find your fb id [here](https://findmyfbid.com/)
+
+Thanks [@salahawad](https://github.com/salahawad) of Beirut for the hint :)
+
 ## Install
 
 To run a dev-server as you develop, clone this repo, `yarn`, and `yarn serve`
